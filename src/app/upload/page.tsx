@@ -1,16 +1,31 @@
 "use client";
+
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
-export default function UploadPage() {
-  const [style, setStyle] = useState("APA 7th edition");
-  const [file, setFile] = useState<File | null>(null);
+interface UploadResult {
+  filename: string;
+  style: string;
+  citations: string[];
+  Total: number;
+  valid: string[];
+  validCount: number;
+  invalid: string[];
+  invalidCount: number;
+  corrected: string[];
+}
 
-  const handleStyleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+const UploadPage: React.FC = () => {
+  const [style, setStyle] = useState<string>("APA 7th edition");
+  const [file, setFile] = useState<File | null>(null);
+  const router = useRouter();
+
+  const handleStyleChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     setStyle(e.target.value);
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile) {
       if (selectedFile.type !== "application/pdf") {
@@ -21,7 +36,7 @@ export default function UploadPage() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
 
     if (!file) {
@@ -29,7 +44,6 @@ export default function UploadPage() {
       return;
     }
 
-    // Prepare form data to send
     const formData = new FormData();
     formData.append("style", style);
     formData.append("file", file);
@@ -43,10 +57,24 @@ export default function UploadPage() {
     )
       .then((response) => response.json())
       .then((result) => {
-        // Handle successful upload (e.g., redirect or display result)
         console.log(result);
+
+        localStorage.setItem(
+          "uploadResult",
+          JSON.stringify({
+            style: result.style,
+            totalCitations: result.Total,
+            validCitations: result.validCount,
+            invalidCitations: result.invlaidCount,
+            invalid: result.invalid,
+            correct: result.corrected,
+          })
+        );
+
+        router.push("/statistics");
         return result;
       })
+
       .catch((error) => {
         console.error("Upload failed:", error);
         throw new Error(error.message || "Upload failed");
@@ -62,9 +90,8 @@ export default function UploadPage() {
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-center p-6 ">
       <div className="max-w-md w-full">
-        <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-          <h1 className="text-2xl font-bold mb-10">Upload Document</h1>
-        </div>
+        <h1 className="text-2xl font-bold mb-10">Upload Document</h1>
+        <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff7f] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]"></div>
         <form onSubmit={handleSubmit} className="space-y-8">
           <div>
             <label
@@ -110,4 +137,6 @@ export default function UploadPage() {
       </div>
     </main>
   );
-}
+};
+
+export default UploadPage;
