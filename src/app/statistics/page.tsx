@@ -2,6 +2,7 @@
 
 import { FC, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Viewer from "@/components/issues";
 
 const Statistics: FC = () => {
   const [style, setStyle] = useState<string>("");
@@ -9,7 +10,8 @@ const Statistics: FC = () => {
   const [validCitations, setValidCitations] = useState<number>(0);
   const [invalidCitations, setInvalidCitations] = useState<number>(0);
   const [invalidList, setInvalidList] = useState<string[]>([]);
-  const [corrected, setCorrected] = useState<string[]>([]);
+  const [correctList, setCorrectList] = useState<string[]>([]);
+  const [viewIssues, setViewIssues] = useState<boolean>(false);
 
   const router = useRouter();
 
@@ -22,31 +24,31 @@ const Statistics: FC = () => {
         validCitations,
         invalidCitations,
         invalid,
-        corrected,
+        correct,
       } = JSON.parse(result);
       setStyle(style);
       setTotalCitations(totalCitations);
       setValidCitations(validCitations);
       setInvalidCitations(invalidCitations);
-      setInvalidList(invalid || []); // Use default empty array if undefined
-      setCorrected(corrected || []); // Use default empty array if undefined
+      setInvalidList(invalid || []);
+      setCorrectList(correct || []);
     }
   }, []);
 
   const handleViewIssues = () => {
-    router.push("/view-issues"); // Replace with the actual route to view issues
+    setViewIssues(true);
   };
 
   const handleScanNewDocument = () => {
-    router.push("/upload"); // Replace with the actual route to upload a new document
+    router.push("/upload");
   };
 
   return (
-    <main className="relative flex min-h-screen flex-col items-start justify-center px-10">
-      <div className="text-zinc-700 dark:text-zinc-600 text-2xl font-bold mb-8 ml-40">
-        Statistics
-      </div>
-      <div className="w-[400px] ml-40">
+    <main className="relative min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20">
+      <div className="w-full max-w-md sm:max-w-lg mb-8">
+        <div className="text-zinc-700 dark:text-zinc-500 text-2xl font-bold mb-8 text-center">
+          Statistics
+        </div>
         <div className="bg-white dark:bg-[#1a1a2e31] shadow-lg rounded-xl border border-gray-300 dark:border-neutral-800 p-6">
           <ul className="space-y-4">
             <li className="flex justify-between">
@@ -82,21 +84,47 @@ const Statistics: FC = () => {
           </ul>
         </div>
       </div>
-      <div className="ml-40 mt-8 flex space-x-4">
-        {invalidCitations > 0 ? (
-          <button
-            onClick={handleViewIssues}
-            className="px-4 py-2 bg-blue-800 text-white rounded-lg hover:bg-blue-700"
-          >
-            view all issues
-          </button>
+
+      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff7f] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]"></div>
+
+      <div className="w-full max-w-md sm:max-w-lg text-center mt-4">
+        {!viewIssues ? (
+          <>
+            <div className="mb-4">
+              <img
+                src="/images/cloud-data.png"
+                alt="Cloud Data"
+                width={200}
+                height={200}
+                className="mx-auto"
+              />
+              <p className="text-lg font-medium mt-2 dark:text-zinc-400">
+                {invalidCitations > 0
+                  ? "View issues detected in the document."
+                  : "Hooray 🎉, no issues with your document."}
+              </p>
+            </div>
+
+            <div className="flex flex-col space-y-4 sm:space-y-5">
+              {invalidCitations > 0 ? (
+                <button
+                  onClick={handleViewIssues}
+                  className="px-6 sm:px-8 py-2 max-w-xs mx-auto bg-blue-800 text-white rounded-lg hover:bg-blue-700"
+                >
+                  View citation issues
+                </button>
+              ) : (
+                <button
+                  onClick={handleScanNewDocument}
+                  className="px-6 sm:px-8 py-2 max-w-xs mx-auto bg-blue-800 text-white rounded-lg hover:bg-blue-800"
+                >
+                  Scan new documents
+                </button>
+              )}
+            </div>
+          </>
         ) : (
-          <button
-            onClick={handleScanNewDocument}
-            className="px-4 py-2 bg-blue-800 text-white rounded-lg hover:bg-blue-800"
-          >
-            scan new documents
-          </button>
+          <Viewer invalidList={invalidList} correctedList={correctList} />
         )}
       </div>
     </main>

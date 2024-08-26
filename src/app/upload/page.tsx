@@ -56,7 +56,7 @@ const UploadPage: React.FC = () => {
       }
     )
       .then((response) => response.json())
-      .then((result) => {
+      .then((result: UploadResult) => {
         console.log(result);
 
         localStorage.setItem(
@@ -65,7 +65,7 @@ const UploadPage: React.FC = () => {
             style: result.style,
             totalCitations: result.Total,
             validCitations: result.validCount,
-            invalidCitations: result.invlaidCount,
+            invalidCitations: result.invalidCount,
             invalid: result.invalid,
             correct: result.corrected,
           })
@@ -88,11 +88,11 @@ const UploadPage: React.FC = () => {
   };
 
   return (
-    <main className="relative flex min-h-screen flex-col items-center justify-center p-6 ">
-      <div className="max-w-md w-full">
-        <h1 className="text-2xl font-bold mb-10">Upload Document</h1>
+    <main className="relative flex min-h-screen flex-col items-center justify-center p-4 sm:p-6 lg:p-8">
+      <div className="w-full max-w-md px-4 py-6  shadow-md rounded-lg">
+        <h1 className="text-xl md:text-2xl font-bold mb-6">Upload Document</h1>
         <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff7f] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]"></div>
-        <form onSubmit={handleSubmit} className="space-y-8">
+        <form onSubmit={handleSubmit} className="space-y-6 md:space-y-7">
           <div>
             <label
               htmlFor="style"
@@ -104,7 +104,7 @@ const UploadPage: React.FC = () => {
               id="style"
               value={style}
               onChange={handleStyleChange}
-              className="mt-2 px-2 block w-full bg-gray-800 text-white border border-gray-600 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 h-12"
+              className="mt-2 px-3 block w-full bg-gray-800 text-white border border-gray-600 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 h-12"
             >
               <option value="APA 7th edition">APA 7th edition</option>
               <option value="MLA edition">MLA edition</option>
@@ -123,7 +123,7 @@ const UploadPage: React.FC = () => {
               type="file"
               accept=".pdf"
               onChange={handleFileChange}
-              className="mt-2 block w-full text-sm text-gray-500 file:py-2 file:px-4 file:border file:border-gray-300 file:rounded-md file:text-sm file:font-medium file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200 dark:file:bg-gray-700 dark:file:text-gray-300 dark:file:border-gray-600 dark:file:hover:bg-gray-600"
+              className="mt-1 block w-full text-sm text-gray-500 file:py-2 file:px-4 file:border file:border-gray-300 file:rounded-md file:text-sm file:font-medium file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200 dark:file:bg-gray-700 dark:file:text-gray-300 dark:file:border-gray-600 dark:file:hover:bg-gray-600"
             />
           </div>
 
