@@ -91,7 +91,7 @@ export default function Home() {
         >
           <h2 className="mb-2 text-xl md:text-2xl font-semibold">scans</h2>
           <p className="m-0 max-w-[30ch] text-sm opacity-75">
-            Not sure what format was used in a document? Do a quick scan for
+            Not sure what citation style was used in a document? Do a quick scan for
             free.
           </p>
         </a>
@@ -103,7 +103,7 @@ export default function Home() {
         >
           <h2 className="mb-2 text-xl md:text-2xl font-semibold">styles</h2>
           <p className="m-0 max-w-[30ch] text-sm opacity-75">
-            Currently have support for APA & MLA in-text citations. Keep an eye
+            Support for APA 7th & MLA 9th edition in-text citations. Keep an eye
             out for new releases.
           </p>
         </a>

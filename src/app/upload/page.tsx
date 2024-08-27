@@ -109,7 +109,7 @@ const UploadPage: React.FC = () => {
               className="mt-2 px-3 block w-full bg-gray-800 text-white border border-gray-600 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 h-12"
             >
               <option value="APA 7th edition">APA 7th edition</option>
-              <option value="MLA edition">MLA edition</option>
+              <option value="MLA 9th edition">MLA 9th edition</option>
             </select>
           </div>
 
