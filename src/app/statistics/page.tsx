@@ -51,9 +51,17 @@ const Statistics: FC = () => {
         </div>
         <div className="shadow-lg rounded-xl border border-[#2c2c3a] p-6">
           {totalCitations === 0 ? (
-            <p className="text-center text-zinc-400">
-              Sorry :), No related citations in this document.
-            </p>
+            <div className="text-center">
+              <p className="text-zinc-400 mb-4">
+                Sorry:) No related citations in this document.
+              </p>
+              <button
+                onClick={handleScanNewDocument}
+                className="px-6 sm:px-12 py-2 max-w-xs mx-auto bg-blue-800 text-white rounded-lg hover:bg-blue-700"
+              >
+                Scan new documents
+              </button>
+            </div>
           ) : (
             <ul className="space-y-4">
               <li className="flex justify-between">
