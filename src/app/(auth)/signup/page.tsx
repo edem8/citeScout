@@ -4,17 +4,41 @@ import { FC, useState } from "react";
 import { useRouter } from "next/navigation";
 import { EyeIcon, EyeOffIcon } from "@heroicons/react/outline";
 import { FcGoogle } from "react-icons/fc";
+import { toast } from "sonner";
+import {
+  signInWithPopup,
+  auth,
+  provider,
+  createUserWithEmailAndPassword,
+} from "../../../services/firebase";
 
 const SignIn: FC = () => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [agreeToTerms, setAgreeToTerms] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [agreeToNewsletter, setAgreeToNewsletter] = useState(false);
 
-  const handleGoogleSignIn = () => {};
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithPopup(auth, provider);
+      toast.success("Registration successful");
+      setTimeout(() => {
+        router.push("/");
+      }, 1000);
+    } catch (error: any) {
+      toast.error(`${error.message}`);
+    }
+  };
 
-  const handleEmailSignIn = () => {
-    router.push("/dashboard");
+  const handleSignupWithEmailAndPassword = async () => {
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      toast.success("Registration successful");
+    } catch (error: any) {
+      toast.error(error.message);
+    }
   };
 
   const togglePasswordVisibility = () => {
@@ -31,6 +55,7 @@ const SignIn: FC = () => {
         <button
           className="w-full px-4 py-2 flex items-center justify-center border border-gray-500 rounded-lg hover:bg-gray-700"
           onClick={handleGoogleSignIn}
+          disabled={!agreeToTerms}
         >
           <FcGoogle className="w-5 h-5 mr-2" />
           Sign up with Google
@@ -43,6 +68,10 @@ const SignIn: FC = () => {
               type="email"
               placeholder="myname@gmail.com"
               className="w-full px-3 py-3 bg-[#020815] border border-gray-600 rounded-lg text-gray-200"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
             />
           </div>
 
@@ -51,6 +80,10 @@ const SignIn: FC = () => {
             <input
               type={showPassword ? "text" : "password"}
               className="w-full px-3 py-3 bg-[#020815] border border-gray-600 rounded-lg text-gray-100 pr-10"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
             <div
               className="absolute inset-y-0 right-0 top-6 flex items-center px-3 text-gray-400 cursor-pointer"
@@ -108,7 +141,7 @@ const SignIn: FC = () => {
 
         <button
           className="w-full px-4 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-500 mt-6"
-          onClick={handleEmailSignIn}
+          onClick={handleSignupWithEmailAndPassword}
           disabled={!agreeToTerms}
         >
           Sign Up

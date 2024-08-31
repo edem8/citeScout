@@ -49,7 +49,7 @@ const UploadPage: React.FC = () => {
     formData.append("file", file);
 
     const uploadPromise = fetch(
-      process.env.NEXT_PUBLIC_APP_AI_MICROSERVICE || "",
+      process.env.NEXT_PUBLIC_AI_MICROSERVICE || "",
       {
         method: "POST",
         body: formData,
