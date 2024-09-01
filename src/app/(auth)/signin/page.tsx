@@ -2,17 +2,51 @@
 
 import { FC, useState } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { EyeIcon, EyeOffIcon } from "@heroicons/react/outline";
 import { FcGoogle } from "react-icons/fc";
+import {
+  auth,
+  signInWithEmailAndPassword,
+  provider,
+  signInWithPopup,
+} from "@/services/firebase";
 
 const SignIn: FC = () => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleGoogleSignIn = () => {};
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithPopup(auth, provider);
+      toast.success("Registration successful");
+      setTimeout(() => {
+        router.push("/");
+      }, 1000);
+    } catch (error: any) {
+      toast.error(`${error.code}`);
+    }
+  };
 
-  const handleEmailSignIn = () => {
-    router.push("/dashboard");
+  const handleEmailSignIn = async () => {
+    try {
+      const userCredentials = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      if (userCredentials.user) {
+        toast.success("Sigin successful");
+        setTimeout(() => {
+          router.push("/");
+        }, 1000);
+      }
+    } catch (error: any) {
+      toast.error(error.code);
+    }
   };
 
   const togglePasswordVisibility = () => {
@@ -41,6 +75,9 @@ const SignIn: FC = () => {
               type="email"
               placeholder="myname@gmail.com"
               className="w-full px-3 py-3 bg-[#020815] border border-gray-600 rounded-lg text-gray-200"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
             />
           </div>
 
@@ -49,6 +86,9 @@ const SignIn: FC = () => {
             <input
               type={showPassword ? "text" : "password"}
               className="w-full px-3 py-3 bg-[#020815] border border-gray-600 rounded-lg text-gray-100 pr-10"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
             <div
               className="absolute inset-y-0 right-0 top-6 flex items-center px-3 text-gray-400 cursor-pointer"

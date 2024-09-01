@@ -28,7 +28,7 @@ const SignIn: FC = () => {
         router.push("/");
       }, 1000);
     } catch (error: any) {
-      toast.error(`${error.message}`);
+      toast.error(`${error.code}`);
     }
   };
 
@@ -36,6 +36,9 @@ const SignIn: FC = () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       toast.success("Registration successful");
+      setTimeout(() => {
+        router.push("/");
+      }, 1000);
     } catch (error: any) {
       toast.error(error.message);
     }

@@ -3,8 +3,10 @@ import {
   getAuth,
   signInWithPopup,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
   GoogleAuthProvider,
-  sendPasswordResetEmail
+  sendPasswordResetEmail,
+
 } from "firebase/auth";
 import { getFirestore, } from "firebase/firestore";
 
@@ -30,7 +32,9 @@ export {
   auth,
   db,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
   provider,
   sendPasswordResetEmail,
-  signInWithPopup
+  signInWithPopup,
+
 }

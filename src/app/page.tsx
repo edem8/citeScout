@@ -1,12 +1,17 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "@/services/firebase";
 
 export default function Home() {
   const router = useRouter();
+  const [user] = useAuthState(auth);
 
   const handleSendDocs = () => {
-    router.push("/upload");
+    if (user) {
+      router.push("/upload");
+    }
   };
 
   return (
@@ -18,12 +23,14 @@ export default function Home() {
           </h1>
         </div>
         <div className="flex-shrink-0">
-          <a
-            href="/signin"
-            className="bg-[#151B27] text-white border border-[#151B27] rounded-lg px-6 py-3 font-bold cursor-pointer hover:bg-[#181f30d0] hover:text-white"
-          >
-            Sign in
-          </a>
+          {!user && (
+            <a
+              href="/signin"
+              className="bg-[#151B27] text-white border border-[#151B27] rounded-lg px-6 py-3 font-bold cursor-pointer hover:bg-[#181f30d0] hover:text-white"
+            >
+              Sign in
+            </a>
+          )}
         </div>
       </header>
 
@@ -91,8 +98,8 @@ export default function Home() {
         >
           <h2 className="mb-2 text-xl md:text-2xl font-semibold">scans</h2>
           <p className="m-0 max-w-[30ch] text-sm opacity-75">
-            Not sure what citation style was used in a document? Do a quick scan for
-            free.
+            Not sure what citation style was used in a document? Do a quick scan
+            for free.
           </p>
         </a>
 
