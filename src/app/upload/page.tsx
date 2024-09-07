@@ -23,12 +23,18 @@ const UploadPage: React.FC = () => {
   const [style, setStyle] = useState<string>("APA 7th edition");
   const [file, setFile] = useState<File | null>(null);
   const router = useRouter();
+  const [showLoader, setShowLoader] = useState<true | false>(true);
   const [user, loading] = useAuthState(auth);
 
   useEffect(() => {
-    if (!loading && !user) {
-      router.push("/");
-    }
+    const delay = setTimeout(() => {
+      if (!loading && !user) {
+        router.push("/");
+      }
+      setShowLoader(false);
+    }, 1500);
+
+    return () => clearTimeout(delay);
   }, [loading, user, router]);
 
   const handleStyleChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
@@ -94,7 +100,7 @@ const UploadPage: React.FC = () => {
     });
   };
 
-  if (loading || !user) {
+  if (loading || showLoader) {
     return <Loader />;
   }
 

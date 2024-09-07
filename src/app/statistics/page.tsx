@@ -15,14 +15,19 @@ const Statistics: FC = () => {
   const [invalidList, setInvalidList] = useState<string[]>([]);
   const [correctList, setCorrectList] = useState<string[]>([]);
   const [viewIssues, setViewIssues] = useState<boolean>(false);
+  const [showLoader, setShowLoader] = useState<true | false>(true);
   const [user, loading] = useAuthState(auth);
-
   const router = useRouter();
 
   useEffect(() => {
-    if (!loading && !user) {
-      router.push("/");
-    }
+    const delay = setTimeout(() => {
+      if (!loading && !user) {
+        router.push("/");
+      }
+      setShowLoader(false);
+    }, 1500);
+
+    return () => clearTimeout(delay);
   }, [loading, user, router]);
 
   useEffect(() => {
@@ -53,7 +58,7 @@ const Statistics: FC = () => {
     router.push("/upload");
   };
 
-  if (loading || !user) {
+  if (loading || showLoader) {
     return <Loader />;
   }
 
