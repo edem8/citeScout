@@ -27,14 +27,11 @@ const UploadPage: React.FC = () => {
   const [user, loading] = useAuthState(auth);
 
   useEffect(() => {
-    const delay = setTimeout(() => {
-      if (!loading && !user) {
-        router.push("/");
-      }
+    if (!loading && !user) {
+      router.push("/");
+    } else if (!loading && user) {
       setShowLoader(false);
-    }, 1500);
-
-    return () => clearTimeout(delay);
+    }
   }, [loading, user, router]);
 
   const handleStyleChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
@@ -100,7 +97,7 @@ const UploadPage: React.FC = () => {
     });
   };
 
-  if (loading || showLoader) {
+  if (showLoader) {
     return <Loader />;
   }
 

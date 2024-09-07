@@ -20,35 +20,29 @@ const Statistics: FC = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const delay = setTimeout(() => {
-      if (!loading && !user) {
-        router.push("/");
-      }
+    if (!loading && !user) {
+      router.push("/");
+    } else if (!loading && user) {
       setShowLoader(false);
-    }, 1500);
-
-    return () => clearTimeout(delay);
-  }, [loading, user, router]);
-
-  useEffect(() => {
-    const result = localStorage.getItem("uploadResult");
-    if (result) {
-      const {
-        style,
-        totalCitations,
-        validCitations,
-        invalidCitations,
-        invalid,
-        correct,
-      } = JSON.parse(result);
-      setStyle(style);
-      setTotalCitations(totalCitations);
-      setValidCitations(validCitations);
-      setInvalidCitations(invalidCitations);
-      setInvalidList(invalid || []);
-      setCorrectList(correct || []);
+      const result = localStorage.getItem("uploadResult");
+      if (result) {
+        const {
+          style,
+          totalCitations,
+          validCitations,
+          invalidCitations,
+          invalid,
+          correct,
+        } = JSON.parse(result);
+        setStyle(style);
+        setTotalCitations(totalCitations);
+        setValidCitations(validCitations);
+        setInvalidCitations(invalidCitations);
+        setInvalidList(invalid || []);
+        setCorrectList(correct || []);
+      }
     }
-  }, []);
+  }, [loading, user, router]);
 
   const handleViewIssues = () => {
     setViewIssues(true);
@@ -58,7 +52,7 @@ const Statistics: FC = () => {
     router.push("/upload");
   };
 
-  if (loading || showLoader) {
+  if (showLoader) {
     return <Loader />;
   }
 
