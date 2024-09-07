@@ -3,6 +3,8 @@
 import { FC, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Viewer from "@/components/issues";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "@/services/firebase";
 
 const Statistics: FC = () => {
   const [style, setStyle] = useState<string>("");
@@ -12,8 +14,15 @@ const Statistics: FC = () => {
   const [invalidList, setInvalidList] = useState<string[]>([]);
   const [correctList, setCorrectList] = useState<string[]>([]);
   const [viewIssues, setViewIssues] = useState<boolean>(false);
+  const [user, loading] = useAuthState(auth);
 
   const router = useRouter();
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push("/");
+    }
+  }, [user, loading, router]);
 
   useEffect(() => {
     const result = localStorage.getItem("uploadResult");

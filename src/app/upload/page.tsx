@@ -1,7 +1,9 @@
 "use client";
 
+import { auth } from "@/services/firebase";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "sonner";
 
 interface UploadResult {
@@ -20,6 +22,13 @@ const UploadPage: React.FC = () => {
   const [style, setStyle] = useState<string>("APA 7th edition");
   const [file, setFile] = useState<File | null>(null);
   const router = useRouter();
+  const [user, loading] = useAuthState(auth);
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push("/");
+    }
+  }, [user, loading, router]);
 
   const handleStyleChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     setStyle(e.target.value);
@@ -48,13 +57,10 @@ const UploadPage: React.FC = () => {
     formData.append("style", style);
     formData.append("file", file);
 
-    const uploadPromise = fetch(
-      process.env.NEXT_PUBLIC_AI_MICROSERVICE || "",
-      {
-        method: "POST",
-        body: formData,
-      }
-    )
+    const uploadPromise = fetch(process.env.NEXT_PUBLIC_AI_MICROSERVICE || "", {
+      method: "POST",
+      body: formData,
+    })
       .then((response) => response.json())
       .then((result: UploadResult) => {
         console.log(result);

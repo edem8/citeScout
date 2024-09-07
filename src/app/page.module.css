@@ -1,0 +1,66 @@
+.loaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  perspective: 800px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.loaderCube {
+  position: relative;
+  width: 3em;
+  height: 3em;
+  transform-style: preserve-3d;
+  animation: rotateCube 2s infinite linear;
+}
+
+.loaderSide {
+  position: absolute;
+  width: 3em;
+  height: 3em;
+  background: linear-gradient(135deg, #3128629e, #343a40);
+  border: 0.1em solid rgba(255, 255, 255, 0.8);
+  border-radius: 0.5em;
+}
+
+.front {
+  transform: translateZ(1.5em);
+}
+.back {
+  transform: rotateY(180deg) translateZ(1.5em);
+}
+.right {
+  transform: rotateY(90deg) translateZ(1.5em);
+}
+.left {
+  transform: rotateY(-90deg) translateZ(1.5em);
+}
+.top {
+  transform: rotateX(90deg) translateZ(1.5em);
+}
+.bottom {
+  transform: rotateX(-90deg) translateZ(1.5em);
+}
+
+@keyframes rotateCube {
+  from {
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+  to {
+    transform: rotateX(360deg) rotateY(360deg);
+  }
+}
+
+.loaderSide:hover {
+  background: linear-gradient(135deg, #6c63ff, #3c3c3c);
+  border-color: #fff;
+}
+
+.loaderSide:focus {
+  border-color: #f1f1f1;
+}
+
+.loaderSide:active {
+  opacity: 0.9;
+}

@@ -3,16 +3,33 @@
 import { useRouter } from "next/navigation";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/services/firebase";
+import { useState } from "react";
+import styles from "./page.module.css";
 
 export default function Home() {
   const router = useRouter();
-  const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
 
   const handleSendDocs = () => {
     if (user) {
       router.push("/upload");
     }
   };
+
+  if (loading) {
+    return (
+      <div className={styles.loaderContainer}>
+        <div className={styles.loaderCube}>
+          <div className={`${styles.loaderSide} ${styles.front}`}></div>
+          <div className={`${styles.loaderSide} ${styles.back}`}></div>
+          <div className={`${styles.loaderSide} ${styles.left}`}></div>
+          <div className={`${styles.loaderSide} ${styles.right}`}></div>
+          <div className={`${styles.loaderSide} ${styles.top}`}></div>
+          <div className={`${styles.loaderSide} ${styles.bottom}`}></div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-4 md:p-8 lg:p-24 text-white">
