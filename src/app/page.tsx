@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/services/firebase";
 import { useState } from "react";
-import styles from "./page.module.css";
+import Loader from "@/components/loader";
 
 export default function Home() {
   const router = useRouter();
@@ -17,18 +17,7 @@ export default function Home() {
   };
 
   if (loading) {
-    return (
-      <div className={styles.loaderContainer}>
-        <div className={styles.loaderCube}>
-          <div className={`${styles.loaderSide} ${styles.front}`}></div>
-          <div className={`${styles.loaderSide} ${styles.back}`}></div>
-          <div className={`${styles.loaderSide} ${styles.left}`}></div>
-          <div className={`${styles.loaderSide} ${styles.right}`}></div>
-          <div className={`${styles.loaderSide} ${styles.top}`}></div>
-          <div className={`${styles.loaderSide} ${styles.bottom}`}></div>
-        </div>
-      </div>
-    );
+    return <Loader />;
   }
 
   return (

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Viewer from "@/components/issues";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/services/firebase";
+import Loader from "@/components/loader";
 
 const Statistics: FC = () => {
   const [style, setStyle] = useState<string>("");
@@ -22,7 +23,7 @@ const Statistics: FC = () => {
     if (!loading && !user) {
       router.push("/");
     }
-  }, [user, loading, router]);
+  }, [loading, user, router]);
 
   useEffect(() => {
     const result = localStorage.getItem("uploadResult");
@@ -51,6 +52,10 @@ const Statistics: FC = () => {
   const handleScanNewDocument = () => {
     router.push("/upload");
   };
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <main className="relative min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 md:px-10 lg:px-16 xl:px-20">

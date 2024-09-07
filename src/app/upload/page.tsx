@@ -1,5 +1,6 @@
 "use client";
 
+import Loader from "@/components/loader";
 import { auth } from "@/services/firebase";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -28,7 +29,7 @@ const UploadPage: React.FC = () => {
     if (!loading && !user) {
       router.push("/");
     }
-  }, [user, loading, router]);
+  }, [loading, user, router]);
 
   const handleStyleChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     setStyle(e.target.value);
@@ -92,6 +93,10 @@ const UploadPage: React.FC = () => {
       error: (error) => `Error: ${error.message || error}`,
     });
   };
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-center p-4 sm:p-6 lg:p-8 ">
