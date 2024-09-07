@@ -94,7 +94,7 @@ const UploadPage: React.FC = () => {
     });
   };
 
-  if (loading) {
+  if (loading || !user) {
     return <Loader />;
   }
 

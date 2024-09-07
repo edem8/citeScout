@@ -53,7 +53,7 @@ const Statistics: FC = () => {
     router.push("/upload");
   };
 
-  if (loading) {
+  if (loading || !user) {
     return <Loader />;
   }
 
