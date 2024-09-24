@@ -63,7 +63,6 @@ const UploadPage: React.FC = () => {
 
     const uploadPromise = fetch(process.env.NEXT_PUBLIC_AI_MICROSERVICE || "", {
       method: "POST",
-      mode: "no-cors",
       body: formData,
     })
       .then((response) => response.json())
