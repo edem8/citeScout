@@ -1,4 +1,4 @@
-# CiteScout - citation format validator
+# Citation format validator
 
 Final year project: A research domain project. This applciation allows for upload of research document in .pdf.
 It extracts all in-text citations in your document and verifies if they follow a selected format. A cool feature is a statistics
@@ -6,16 +6,12 @@ and issues page that renders your errors as well as the correct version to you.
 
 ## Table of contents
 
-- [Overview](#overview)
-  - [Screenshot](#screenshot)
-  - [Links](#links)
-- [My process](#my-process)
-  - [Built with](#built-with)
+- [Screenshot](#screenshot)
+- [Links](#links)
+- [Built with](#built-with)
 - [Contribute](#contribute)
 - [Author](#author)
 - [Acknowledgments](#acknowledgments)
-
-## Overview
 
 ### Screenshot
 
@@ -35,8 +31,6 @@ Issues
 
 - Solution URL: [Find the project source code on Github](https://github.com/edem8/citeScout)
 - Live Site URL: [Interact with App](https://cite-scout.vercel.app/)
-
-## My process
 
 ### Built with
 
