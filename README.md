@@ -59,16 +59,20 @@ npm install
 - Role- Backend development
 
 Veronica Amokwandoh- 
+
 Role- Frontend development 
 
 Yeboah Bridget
+
 Role - Project Research 
 -LinkedIn- (www.linkedin.com/bridgetyeboah)
 
 Bernice Gardiner 
+
 Role - User interface design 
 
 Philemon Nyarko
+
 Role- User documentation.
 
 ## Acknowledgments
