@@ -10,7 +10,7 @@ and issues page that renders your errors as well as the correct version to you.
 - [Links](#links)
 - [Built with](#built-with)
 - [Contribute](#contribute)
-- [Author](#author)
+- [Authors](#author)
 - [Acknowledgments](#acknowledgments)
 
 ### Screenshot
@@ -58,22 +58,25 @@ npm install
 - Twitter - [@eDlaWss](https://www.twitter.com/eDlaWss)
 - Role- Backend development
 
-Veronica Amokwandoh- 
+-Veronica Amokwandoh
 
-Role- Frontend development 
+-Role- Frontend development 
 
-Yeboah Bridget
 
-Role - Project Research 
+-Yeboah Bridget
+
+-Role - Project Research 
 -LinkedIn- (www.linkedin.com/bridgetyeboah)
 
-Bernice Gardiner 
 
-Role - User interface design 
+-Bernice Gardiner 
 
-Philemon Nyarko
+-Role - User interface design 
 
-Role- User documentation.
+
+-Philemon Nyarko
+
+-Role- User documentation.
 
 ## Acknowledgments
 
