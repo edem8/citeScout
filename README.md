@@ -29,7 +29,12 @@ Issues
 
 ### Links
 
-- Solution URL: [Find the project source code on Github](https://github.com/edem8/citeScout)
+- Solution URL: [Find the project source code on Github]
+  
+-User interface design - https://www.figma.com/design/43NTtNQSlW35wlZvxFbKsP/Research-integrity?node-id=0-1&t=6qAq2VcK19UBpojb-1
+
+
+- (https://github.com/edem8/citeScout)
 - Live Site URL: [Interact with App](https://cite-scout.vercel.app/)
 
 ### Built with
@@ -66,7 +71,9 @@ npm install
 -Yeboah Bridget
 
 -Role - Project Research 
--LinkedIn- (www.linkedin.com/bridgetyeboah)
+-LinkedIn- 
+
+(www.linkedin.com/bridgetyeboah)
 
 
 -Bernice Gardiner 
