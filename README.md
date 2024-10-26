@@ -52,10 +52,24 @@ npm install
 
 - Create a pull request
 
-## Author
+## Authors
 
 - Github - [Kwaku Kwadwo Edem Bless](https://github.com/edem8)
 - Twitter - [@eDlaWss](https://www.twitter.com/eDlaWss)
+- Role- Backend development
+
+Veronica Amokwandoh- 
+Role- Frontend development 
+
+Yeboah Bridget
+Role - Project Research 
+-LinkedIn- (www.linkedin.com/bridgetyeboah)
+
+Bernice Gardiner 
+Role - User interface design 
+
+Philemon Nyarko
+Role- User documentation.
 
 ## Acknowledgments
 
