@@ -105,7 +105,7 @@ const UploadPage: React.FC = () => {
     <main className="relative flex min-h-screen flex-col items-center justify-center p-4 sm:p-6 lg:p-8 ">
       <div className="w-full max-w-md px-4 py-6 shadow-md rounded-lg ">
         <h1 className="text-xl md:text-2xl font-bold mb-6 text-white">
-          Upload Document
+          Document
         </h1>
         <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-[#1a1a2e] before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-[#1a1a2e] after:via-[#0141ff6c] after:blur-2xl after:content-[''] before:dark:opacity-10 after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]"></div>
         <form onSubmit={handleSubmit} className="space-y-6 md:space-y-7">
@@ -145,7 +145,7 @@ const UploadPage: React.FC = () => {
 
           <button
             type="submit"
-            className="w-full py-3 px-4 bg-blue-800 text-white rounded-lg font-bold cursor-pointer hover:bg-blue-800/80 mt-6"
+            className="w-full py-4 px-4 bg-blue-800 text-white text-sm rounded-sm font-semibold tracking-wide cursor-pointer hover:bg-blue-800/80 mt-6"
           >
             Upload
           </button>

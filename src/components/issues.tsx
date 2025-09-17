@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FaCircleArrowLeft, FaCircleArrowRight } from "react-icons/fa6";
 
 interface ViewerProps {
   invalidList: string[];
@@ -24,41 +25,34 @@ const Viewer: React.FC<ViewerProps> = ({ invalidList, correctedList }) => {
 
   return (
     <div className="flex items-center justify-center">
-      <div className="shadow-lg rounded-xl border border-[#2c2c2c] p-6 w-[400px] space-y-6">
-        <div className="text-center text-gray-400 text-lg font-semibold">
-          Issue {currentIssueIndex + 1} of {totalIssues}
-        </div>
-
-        <div className="space-y-4">
-          <div className="text-red-400 line-through font-bold text-lg">
-            {invalidList[currentIssueIndex]}
-          </div>
-          <div className="text-green-400 text-xl font-bold">
-            {correctedList[currentIssueIndex]}
-          </div>
-        </div>
-
-        <div className="flex justify-between">
-          <button
+      <div className="shadow-lg rounded-xl border-none border-[#2c2c2c] p-6 w-[400px] space-y-6">
+        <div className="flex items-center justify-center text-gray-400 text-lg font-medium">
+          <FaCircleArrowLeft
             onClick={handlePreviousIssue}
-            disabled={currentIssueIndex === 0}
-            className={`px-4 py-2 bg-blue-800 text-white rounded-lg hover:bg-blue-700 ${
+            className={`w-6 h-6 cursor-pointer ${
               currentIssueIndex === 0 ? "opacity-50 cursor-not-allowed" : ""
             }`}
-          >
-            View Previous Issue
-          </button>
-          <button
+          />
+          <div className="mx-4 text-sm">
+            {currentIssueIndex + 1} / {totalIssues}
+          </div>
+          <FaCircleArrowRight
             onClick={handleNextIssue}
-            disabled={currentIssueIndex === totalIssues - 1}
-            className={`px-4 py-2 bg-blue-800 text-white rounded-lg hover:bg-blue-700 ${
+            className={`w-6 h-6 cursor-pointer ${
               currentIssueIndex === totalIssues - 1
                 ? "opacity-50 cursor-not-allowed"
                 : ""
             }`}
-          >
-            View Next Issue
-          </button>
+          />
+        </div>
+
+        <div className="space-y-2">
+          <div className="text-red-400 line-through font-semibold text-base">
+            {invalidList[currentIssueIndex]}
+          </div>
+          <div className="text-green-400 text-lg font-semibold">
+            {correctedList[currentIssueIndex]}
+          </div>
         </div>
       </div>
     </div>
