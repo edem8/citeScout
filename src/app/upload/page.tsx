@@ -145,7 +145,7 @@ const UploadPage: React.FC = () => {
 
           <button
             type="submit"
-            className="w-full py-3 px-4 bg-blue-800 text-white rounded-lg font-bold cursor-pointer hover:bg-blue-600 mt-6"
+            className="w-full py-3 px-4 bg-blue-800 text-white rounded-lg font-bold cursor-pointer hover:bg-blue-800/80 mt-6"
           >
             Upload
           </button>
