@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
-import { Space_Grotesk } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 
-const spaceGrotesk = Space_Grotesk({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "700"],
+});
 
 export const metadata: Metadata = {
-  title: "CITESCOUT       ",
-  description: "A community dedicted to enhanciing research integrity",
+  title: "Sights",
+  description: "A community dedicated to enhancing research integrity",
 };
 
 export default function RootLayout({
@@ -17,9 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={spaceGrotesk.className}>
+      <body className={inter.className}>
+        <Toaster position="bottom-right" />
         {children}
-        <Toaster position="top-right" richColors />
       </body>
     </html>
   );
